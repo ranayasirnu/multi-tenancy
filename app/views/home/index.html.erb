@@ -1,0 +1,31 @@
+	
+
+<!-- <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Dynamic Gitlab</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><%#= link_to "Sign up", new_user_registration_path %></li>
+      <li><%#= link_to "Log in", new_user_session_path %></li> 
+    </ul>
+  </div>
+</nav> -->
+
+	<div class="container bg">
+    <div class="row">
+    <a class="navbar-brand" href="#">welcome to Dynamic Gitlab</a>
+    <div class="col-lg-6">
+			<div class="text-center pull-right">	
+				<% if current_user %>
+		      Logged in as <%= current_user.email %>.
+		      <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+		    <% else %>
+		      <%= link_to "Sign up", new_user_registration_path %> or
+		      <%= link_to "Log in", new_user_session_path %>
+		    <% end %>
+	    </div>
+	  </div>
+	  </div>
+  </div>

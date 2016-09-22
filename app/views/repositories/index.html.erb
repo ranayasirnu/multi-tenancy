@@ -1,0 +1,54 @@
+
+
+
+	<div class="container">
+    <div class="row">
+      <div class="col-sm-6" >
+        <p><%=link_to "create project", new_repository_path %></p>
+      </div>
+      <div class="col-sm-6">
+  			<div class="text-center pull-right">	
+  				<% if current_user %>
+  		      Logged in as <%= current_user.email %>.
+  		      <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+  		    <% else %>
+  		      <%= link_to "Sign up", new_user_registration_path %> or
+  		      <%= link_to "Log in", new_user_session_path %>
+  		    <% end %>
+  	    </div>
+  	  </div>
+	  </div>
+	  <!-- list  -->
+
+    <%if @repositories.present? %>
+
+      <div class="table-responsive">
+        <h2>Your Repositories</h2>
+        <p>These are your dynamic gitlab projects.</p>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Project name</th>
+              <th>Visibility Level</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <% @repositories.each_with_index do |repo, i| %>
+              <tr class="<%= i%2==0 ? 'success' : 'danger' %>" >
+                <td><%= repo.name %></td>
+                <td><%= repo.access_level %></td>
+                <td><%= repo.description %></td>
+              </tr>
+            <% end -%>
+
+          </tbody>
+        </table>
+      </div>
+
+    <%else%>
+      <p>You have not created any project. </p>
+    <% end -%>
+
+</div>

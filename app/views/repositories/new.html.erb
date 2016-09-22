@@ -1,0 +1,51 @@
+
+<%if @repository.errors.present? %>
+<div class="alert alert-danger">
+    <a class="close" data-dismiss="alert">×</a>
+    <% @repository.errors.full_messages.each do |msg| %>
+    <p><%=raw msg %></p>
+    <% end %>
+  </div>
+<% end -%>
+
+<div class="container">
+  <div class="row">
+
+      <h2>New Project</h2>
+
+      <%= form_for @repository, url: repositories_path() do |f| %>
+
+        <div class="field">
+          <%= f.label :project_name %><br />
+          <%= f.text_field :name, autofocus: true %>
+        </div>
+
+        
+        
+        <div class="field">
+        <%= radio_button_tag(:access_level, "Private") %>
+        <%= label_tag(:Private, "Private") %>
+        </div>
+        <div class="field">
+        <%= radio_button_tag(:access_level, "Internal") %>
+        <%= label_tag(:Internal, "Internal") %>
+        </div>
+        <div class="field">
+        <%= radio_button_tag(:access_level, "Public") %>
+        <%= label_tag(:Public, "Public") %>
+        </div>
+
+
+        <div class="field">
+          <%= f.label :description %><br />
+          <%= f.text_area :description %>
+        </div>
+        
+
+        <div class="actions">
+          <%= f.submit "Create" %>
+        </div>
+      <% end %>
+
+  </div>
+</div>
