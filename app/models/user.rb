@@ -4,7 +4,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  validates :subdomain, :presence => {:message => "can't be blank"}
 
-  has_many :repositories
+  after_create :create_tenant
+
+  private
+
+  def create_tenant
+  	Apartment::Tenant.create(subdomain)
+  end
+
   
 end

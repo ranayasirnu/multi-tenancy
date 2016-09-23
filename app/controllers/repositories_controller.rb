@@ -1,5 +1,7 @@
 class RepositoriesController < ApplicationController
 
+	before_action :authenticate_user!
+	before_filter :check_permission 
 
 	def index
 		@repositories = Repository.all
@@ -10,7 +12,7 @@ class RepositoriesController < ApplicationController
 	end
 
 	def create
-		@repository =  current_user.repositories.new(repository_params)
+		@repository =  Repository.new(repository_params)
 		@repository.access_level = params[:access_level]
 
 		if @repository.save
@@ -30,7 +32,13 @@ class RepositoriesController < ApplicationController
     params.require(:repository).permit(:name, :access_level, :description)
   end
 
-
+  def check_permission
+  	if current_user.subdomain != request.subdomain
+  		flash[:notice] = "Please login to your subdomain #{current_user.subdomain}.lvh.me"
+  		sign_out current_user
+		  redirect_to root_url
+		end
+  end
 
 
 
