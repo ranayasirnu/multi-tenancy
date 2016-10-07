@@ -23,3 +23,4 @@ Things you may want to cover:
 
 * ...
 # dynamic_gitlab
+# multi-tenancy
